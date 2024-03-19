@@ -153,8 +153,8 @@ $batinclude "./modules/include.gms" postsolve
 ***                  save gdx
 *--------------------------------------------------------------------------
 *** write the fulldata.gdx file after each optimal iteration
-*AJS* in Nash status 7 is considered optimal in that respect (see definition of
-***   o_modelstat in solve.gms)
+*** In Nash status 7 is considered optimal in that respect (see definition of
+*** o_modelstat in solve.gms)
 logfile.nr = 1;
 if (o_modelstat le 2,
   execute_unload "fulldata";

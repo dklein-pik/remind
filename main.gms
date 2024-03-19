@@ -437,7 +437,7 @@ $setGlobal codePerformance  off       !! def = off
 *' ####                     SWITCHES
 ***-----------------------------------------------------------------------------
 parameter
-  cm_iteration_max          "number of iterations, if optimization is set to negishi or testOneRegi; used in nash mode only with cm_nash_autoconverge = 0"
+  cm_iteration_max          "number of iterations, if optimization is set to negishi or testOneRegi; is overwritten in Nash mode, except for cm_nash_autoconverge = 0"
 ;
   cm_iteration_max       = 1;     !! def = 1
 *'

@@ -6,12 +6,12 @@
 *** |  Contact: remind@pik-potsdam.de
 *** SOF ./modules/80_optimization/nash/solve.gms
 
-regi(all_regi) = no;
-hybrid.solvelink = 3;
+regi(all_regi) = NO;
+hybrid.solvelink = 3; !! activate multiple-CPU mode for GAMS
 hybrid.optfile   = 9;
 
 $ifthene.debug (sameas("%cm_nash_mode%","serial"))OR(sameas("%cm_nash_mode%","debug"))
-hybrid.solvelink = 0;
+hybrid.solvelink = 0;  !! activate single-CPU mode for GAMS
 $endif.debug
 
 loop (all_regi,
@@ -25,7 +25,7 @@ loop (all_regi,
     continue;
   );
 
-  regi(all_regi) = yes;
+  regi(all_regi) = YES;
 
   if (execError > 0,
     execute_unload "abort.gdx";
@@ -90,7 +90,8 @@ loop (regi,
   if (p80_repy(regi,"modelstat") eq 2 OR p80_repy(regi,"modelstat") eq 7,
     pm_SolNonInfes(regi) = 1;
   );
-  if (p80_repy(regi,"modelstat") eq 7, p80_SolNonOpt(regi) = 1);
+  if (p80_repy(regi,"modelstat") eq 7, 
+    p80_SolNonOpt(regi) = 1);
 );
 
 *** set o_modelstat to the highest value across all regions, ignoring status 7 
