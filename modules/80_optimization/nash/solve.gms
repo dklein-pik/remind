@@ -10,9 +10,9 @@ regi(all_regi) = NO;
 hybrid.solvelink = 3; !! activate multiple-CPU mode for GAMS
 hybrid.optfile   = 9;
 
-$ifthene.debug (sameas("%cm_nash_mode%","serial"))OR(sameas("%cm_nash_mode%","debug"))
-hybrid.solvelink = 0;  !! activate single-CPU mode for GAMS
-$endif.debug
+if(cm_nash_mode eq 1,
+  hybrid.solvelink = 0;  !! activate single-CPU mode for GAMS
+);
 
 loop (all_regi,
   !! only solve for regions that do not have a valid solution for this nash
@@ -48,7 +48,7 @@ loop (all_regi,
   
   solve hybrid using nlp maximizing vm_welfareGlob;
 
-$ifthene.debug (sameas("%cm_nash_mode%","serial"))OR(sameas("%cm_nash_mode%","debug"))
+if(cm_nash_mode eq 1,
   p80_repy(all_regi,"solvestat") = hybrid.solvestat;
   p80_repy(all_regi,"modelstat") = hybrid.modelstat;
   p80_repy(all_regi,"resusd")    = hybrid.resusd;
@@ -56,13 +56,13 @@ $ifthene.debug (sameas("%cm_nash_mode%","serial"))OR(sameas("%cm_nash_mode%","de
   if (p80_repy(all_regi,"modelstat") eq 2,
     p80_repyLastOptim(all_regi,"objval") = p80_repy(all_regi,"objval");
   );
-$endif.debug
+);
 
   regi(all_regi) = NO;
   p80_handle(all_regi) = hybrid.handle;
 );  !! close regi loop
 
-$ifthen.parallel %cm_nash_mode% == "parallel"
+if(cm_nash_mode eq 2,
 repeat
   loop (all_regi$handlecollect(p80_handle(all_regi)),
     p80_repy(all_regi,"solvestat") = hybrid.solvestat;
@@ -79,7 +79,7 @@ repeat
   );
   display$sleep(5) "sleep some time";
 until card(p80_handle) = 0;
-$endif.parallel
+);
 
 regi(all_regi) = YES;
 
@@ -98,13 +98,13 @@ loop (regi,
 o_modelstat
   = smax(regi, p80_repy(regi,"modelstat")$(p80_repy(regi,"modelstat") ne 7));
 
-*** in cm_nash_mode=debug mode, enable solprint for next sol_itr when last
+*** in cm_nash_mode=1 (debug) mode, enable solprint for next sol_itr when last
 *** iteration was non-optimal:
-$ifthen.solprint %cm_nash_mode% == "debug" 
+if(cm_nash_mode eq 1,
 if (o_modelstat ne 2,   
     option solprint = on;
 );
-$endif.solprint
+);
 
 p80_repy_iteration(all_regi,solveinfo80,iteration)$(
                                                 p80_repy(all_regi,solveinfo80) )

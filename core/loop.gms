@@ -71,9 +71,12 @@ if( (cm_startyear gt 2005),
 ***--------------------------------------------------------------------------
 ***         SOLVE
 ***--------------------------------------------------------------------------
-***this disables solprint in cm_nash_mode=debug case by default. It is switched on in case of infes in nash/solve.gms
+***this disables solprint in cm_nash_mode=1 (debug) case by default. It is switched on in case of infes in nash/solve.gms
 *RP* for faster debugging, turn solprint immediately on
-$IF %cm_nash_mode% == "debug" option solprint = on ;
+if (cm_nash_mode eq 1, 
+      option solprint = on;
+);
+
 
 o_modelstat = 100;
 loop(sol_itr$(sol_itr.val <= cm_solver_try_max),
