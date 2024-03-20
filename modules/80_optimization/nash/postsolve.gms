@@ -667,6 +667,7 @@ if (cm_abortOnConsecFail gt 0,
       execute_unload "abort.gdx";
       display p80_trackConsecFail;
       abort "Run was aborted because the maximum number of consecutive failures was reached in at least one region!";
+    );
   );
 );
 
