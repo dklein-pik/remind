@@ -10,7 +10,6 @@ parameter
 *LB* parameters for ajustments within one iteration. These cause price anticipation
 p80_etaXp(all_enty)                         "Parameter governing price anticipation on commodity markets"
 
-
 *LB* parameters for ajustments between different iterations
 p80_etaLT(all_enty)                         "long term price ajustment elasticity " 
 p80_etaST(all_enty)                         "short term price ajustment elasticity" 
@@ -129,6 +128,7 @@ s80_numberIterations                       "display helper"
 s80_bool                                   "helper"
 s80_converged                              "if nash converged, this is 1"
 s80_cnptfile                               "parameter that indicates which optimality tolerance will be used"      /1/
+s80_hasRunInDebug                          "Is 1 if regions stayed infeasible in nash and were started in debug mode automatically following the parallel mode" /0/
 
 ;
 

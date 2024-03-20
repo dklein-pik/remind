@@ -659,9 +659,14 @@ if (cm_abortOnConsecFail gt 0,
   );
 
   if (smax(regi, p80_trackConsecFail(regi)) >= cm_abortOnConsecFail,
-    execute_unload "abort.gdx";
-    display p80_trackConsecFail;
-    abort "Run was aborted because the maximum number of consecutive failures was reached in at least one region!";
+    if (s80_hasRunInDebug eq 0,
+      s80_hasRunInDebug = 1;
+      cm_nash_mode = 1;
+      display "#### Starting nash in debug mode after maximum number of consecutive failures was reached in at least one region.";
+    else
+      execute_unload "abort.gdx";
+      display p80_trackConsecFail;
+      abort "Run was aborted because the maximum number of consecutive failures was reached in at least one region!";
   );
 );
 
