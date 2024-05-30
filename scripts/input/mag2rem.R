@@ -27,7 +27,7 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
     mutate(factor = calcFromString(factor)) %>%             # calculate the conversion factor given as string
     mutate(value = value * factor) %>%                      # apply the conversion factor (from MAgPIE to REMIND unit)
     rename(ttot = period, regi = region) %>%                # use REMIND set names 
-    filter(regi != "World", between(ttot, 2000, 2150)) %>%  # "World" region and years before 2000 are not needed in the input to REMIND
+    filter(regi != "World", between(ttot, 2005, 2150)) %>%  # "World" region and years before 2005 are not needed in the input to REMIND
     select(regi, ttot, set, variable, remName, value)       # keep only columns required for import to REMIND
     
   
@@ -68,7 +68,7 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
     records = filter(rep, remName == "f_macBaseMagpie_coupling") %>% 
               select(ttot, regi, set, value) %>%
               rename(emiMacMagpie = set),
-    description = "emissions coming from MAgPIE"
+    description = "emissions from MAgPIE"
   )
   
   p30_pebiolc_pricemag_coupling <- m$addParameter(
@@ -84,7 +84,7 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
     domain = c(ttot, regi),
     records = filter(rep, remName == "pm_pebiolc_demandmag_coupling") %>% 
               select(ttot, regi, value),
-    description = "demand for bioenergy from which the prices result"
+    description = "demand for bioenergy in MAgPIE from which the prices result"
   )
   
   p26_totLUcost_coupling <- m$addParameter(
@@ -92,7 +92,7 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
     domain = c(ttot, regi),
     records = filter(rep, remName == "p26_totLUcost_coupling") %>% 
               select(ttot, regi, value),
-    description = "Total production costs from MAgPIE without costs for GHG"
+    description = "total production costs from MAgPIE without costs for GHG"
   )
   
   # ---- Write to gdx file ----
