@@ -22,4 +22,14 @@ p30_demPe(ttot,regi) =
     ) * 100/40  !!! substitution method
 ;
 
+**** MAgPIE coupling between Nash iterations ***
+
+*DK* Read production of 2nd gen. purpose grown bioenergy from MAgPIE (given to MAgPIE from previous Remind run)
+$if %cm_MAgPIE_coupling% == "on"  Execute_Loadpoint 'magpieData.gdx' pm_pebiolc_demandmag_coupling;
+$if %cm_MAgPIE_coupling% == "on"  pm_pebiolc_demandmag(ttot,regi) = pm_pebiolc_demandmag_coupling(ttot,regi);
+
+*DK* Read prices and costs for 2nd gen. purpose grown bioenergy from MAgPIE (calculated with demnad from previous Remind run)
+$if %cm_MAgPIE_coupling% == "on"  Execute_Loadpoint 'magpieData.gdx' p30_pebiolc_pricemag_coupling;
+$if %cm_MAgPIE_coupling% == "on"  p30_pebiolc_pricemag(ttot,regi) = p30_pebiolc_pricemag_coupling(ttot,regi);
+
 *** EOF ./modules/30_biomass/magpie/postsolve.gms
