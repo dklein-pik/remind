@@ -104,9 +104,10 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
 # Coupling REMIND-MAgPIE
 
 # run REMIND reporting and give path to mif to MAgPIE
+# - remind2::convGDX2MIF_REMIND2MAgPIE(gdx = "fulldata.gdx", file = "REMIND_rem2mag.mif")
 
-# - load from REMIND config in the REMIND run folder:
 load("config.Rdata")
+# - load from REMIND config in the REMIND run folder:
 #   - path_to_magpie
 #   - MAgPIE settings
 #   - run name used for MAgPIE run
