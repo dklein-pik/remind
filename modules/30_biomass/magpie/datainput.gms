@@ -65,6 +65,8 @@ $if %cm_MAgPIE_coupling% == "on"  $offdelim
 $if %cm_MAgPIE_coupling% == "on"  ;
 $if %cm_MAgPIE_coupling% == "on"  pm_pebiolc_demandmag(ttot,regi) = pm_pebiolc_demandmag_coupling(ttot,regi);
 
+display pm_pebiolc_demandmag;
+
 *** Read parameters for bioenergy supply curve
 parameter f30_bioen_price(tall,all_regi,all_LU_emi_scen,all_rcp_scen,all_charScen)  "time dependent fit coefficients for bioenergy price formula"
 /

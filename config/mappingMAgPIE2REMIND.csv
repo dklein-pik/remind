@@ -1,0 +1,16 @@
+magName;remName;set;factor
+Prices|Bioenergy (US$05/GJ);p30_pebiolc_pricemag_coupling;;0.0315576
+Demand|Bioenergy|2nd generation|++|Bioenergy crops (EJ/yr);pm_pebiolc_demandmag_coupling;;1/31.536
+Costs Without Incentives (million US$05/yr);p26_totLUcost_coupling;;1/1000/1000
+Emissions|CO2|Land|+|Land-use Change (Mt CO2/yr);f_macBaseMagpie_coupling;co2luc;1/1000*12/44
+Emissions|N2O|Land|Agriculture|+|Animal Waste Management (Mt N2O/yr);f_macBaseMagpie_coupling;n2oanwstm;28/44
+Emissions|N2O|Land|Agriculture|Agricultural Soils|+|Inorganic Fertilizers (Mt N2O/yr);f_macBaseMagpie_coupling;n2ofertin;28/44
+Emissions|N2O|Land|Agriculture|Agricultural Soils|+|Manure applied to Croplands (Mt N2O/yr);f_macBaseMagpie_coupling;n2oanwstc;28/44
+Emissions|N2O|Land|Agriculture|Agricultural Soils|+|Decay of Crop Residues (Mt N2O/yr);f_macBaseMagpie_coupling;n2ofertcr;28/44
+Emissions|N2O|Land|Agriculture|Agricultural Soils|+|Soil Organic Matter Loss (Mt N2O/yr);f_macBaseMagpie_coupling;n2ofertsom;28/44
+Emissions|N2O|Land|Agriculture|Agricultural Soils|+|Pasture (Mt N2O/yr);f_macBaseMagpie_coupling;n2oanwstp;28/44
+Emissions|N2O|Land|+|Peatland (Mt N2O/yr);f_macBaseMagpie_coupling;n2opeatland;28/44
+Emissions|CH4|Land|Agriculture|+|Rice (Mt CH4/yr);f_macBaseMagpie_coupling;ch4rice;1
+Emissions|CH4|Land|Agriculture|+|Animal waste management (Mt CH4/yr);f_macBaseMagpie_coupling;ch4anmlwst;1
+Emissions|CH4|Land|Agriculture|+|Enteric fermentation (Mt CH4/yr);f_macBaseMagpie_coupling;ch4animals;1
+Emissions|CH4|Land|+|Peatland (Mt CH4/yr);f_macBaseMagpie_coupling;ch4peatland;1

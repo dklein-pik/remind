@@ -1,9 +1,9 @@
 
 getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "couplingMag2Rem.csv") {
   
-  require(gamstransfer, quietly = TRUE, warn.conflicts = FALSE)
-  require(quitte,       quietly = TRUE, warn.conflicts = FALSE)
-  require(dplyr,        quietly = TRUE, warn.conflicts = FALSE)
+  require(gamstransfer), quietly = TRUE, warn.conflicts = FALSE)
+  require(quitte),       quietly = TRUE, warn.conflicts = FALSE)
+  require(dplyr),        quietly = TRUE, warn.conflicts = FALSE)
   
   # ---- Define functions ----
   
@@ -29,7 +29,6 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
     rename(ttot = period, regi = region) %>%                # use REMIND set names 
     filter(regi != "World", between(ttot, 2005, 2150)) %>%  # "World" region and years before 2005 are not needed in the input to REMIND
     select(regi, ttot, set, variable, remName, value)       # keep only columns required for import to REMIND
-    
   
   # check if all variables defined in coupling interface (mapping) exist in MAgPIE report
   missingVariables <- !map$magName %in% rep$variable
@@ -38,7 +37,9 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
          map$magName[missingVariables])
   }
   
-  # ---- SETS ----
+  # ---- Create gdx ----
+  
+  # ---- Define SETS ----
   
   m <- Container$new()
   
@@ -60,7 +61,7 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
     description = "emission types coming from MAgPIE"
   )
   
-  # ---- PARAMETERS ----
+  # ---- Define PARAMETERS ----
   
   f_macBaseMagpie_coupling <- m$addParameter(
     "f_macBaseMagpie_coupling",
@@ -99,3 +100,20 @@ getMagpieData <- function(path_to_report = "report.mif", interfaceRem2Mag = "cou
   
   m$write("magpieData.gdx")
 }
+
+# Coupling REMIND-MAgPIE
+
+# run REMIND reporting and give path to mif to MAgPIE
+
+# - load from REMIND config in the REMIND run folder:
+load("config.Rdata")
+#   - path_to_magpie
+#   - MAgPIE settings
+#   - run name used for MAgPIE run
+# - start MAgPIE
+    # outfolder_mag <- start_run(cfg_mag, codeCheck=FALSE)
+# - obtain path to individual MAgPIE report
+    # report_mag <- file.path(path_magpie, outfolder_mag, "report.mif")
+path_to_report <- "/p/projects/remind/runs/REMIND-MAgPIE-2023-11-27/magpie/output/C_SSP1-PkBudg1050-mag-4/report.mif" # cfg$pathToMagpieReport
+
+getMagpieData(path_to_report = path_to_report, interfaceRem2Mag = "mappingMAgPIE2REMIND.csv")

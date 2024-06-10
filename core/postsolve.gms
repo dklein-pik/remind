@@ -918,4 +918,11 @@ p_FEPrice_by_Sector_iter(iteration,t,regi,entyFe,sector) = p_FEPrice_by_Sector(t
 p_FEPrice_by_EmiMkt_iter(iteration,t,regi,entyFe,emiMkt) = p_FEPrice_by_EmiMkt(t,regi,entyFe,emiMkt);
 p_FEPrice_by_FE_iter(iteration,t,regi,entyFe) = p_FEPrice_by_FE(t,regi,entyFe);
 
+*** Transfer data to MAgPIE, start MAgPIE, transfer data back to REMIND
+Execute "Rscript mag2rem.R";
+
+*DK* Read prices and costs for 2nd gen. purpose grown bioenergy from MAgPIE (calculated with demnad from previous Remind run)
+$if %cm_MAgPIE_coupling% == "on"  Execute_Loadpoint 'magpieData.gdx' f_macBaseMagpie_coupling;
+$if %cm_MAgPIE_coupling% == "on"  pm_macBaseMagpie(ttot,regi,emiMacMagpie(enty))$(ttot.val ge 2005) = f_macBaseMagpie_coupling(ttot,regi,emiMacMagpie);
+
 *** EOF ./core/postsolve.gms

@@ -32,4 +32,6 @@ $if %cm_MAgPIE_coupling% == "on"  pm_pebiolc_demandmag(ttot,regi) = pm_pebiolc_d
 $if %cm_MAgPIE_coupling% == "on"  Execute_Loadpoint 'magpieData.gdx' p30_pebiolc_pricemag_coupling;
 $if %cm_MAgPIE_coupling% == "on"  p30_pebiolc_pricemag(ttot,regi) = p30_pebiolc_pricemag_coupling(ttot,regi);
 
+display pm_pebiolc_demandmag;
+
 *** EOF ./modules/30_biomass/magpie/postsolve.gms
