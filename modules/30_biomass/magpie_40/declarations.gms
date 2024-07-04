@@ -9,6 +9,8 @@
 scalars
 s30_D2TD                "Multiplicative factor to convert from Dollar to TeraDollar"     /1.0e-12/
 s30_switch_shiftcalc    "Switch to activate equation for shift calculation before main solve and to deactivate it during main solve" /0/
+s30_damping_up "upper limit of damping factor on deviations of bio demand between coupling iterations"
+s30_damping_lo "lower limit of damping factor on deviations of bio demand between coupling iterations"
 ;
 
 parameter
@@ -19,6 +21,8 @@ p30_maxprod_residue(ttot,all_regi)              "Maximal potential of residues e
 p30_pebiolc_pricemag(tall,all_regi)             "Prices for lignocellulosic purpose grown bioenergy from MAgPIE [T$US/TWa]"
 pm_pebiolc_demandmag(tall,all_regi)             "Production of lignocellulosic purpose grown bioenergy from MAgPIE [TWa]"
 p30_demPe(ttot,all_regi)                        "Primary energy demand imported from gdx or previous iteration [TWa]"
+
+p30_damping(ttot) "damping factor on deviations of bio demand between coupling iterations"
 
 
 $IFTHEN.bioprod_regi_lim not "%cm_bioprod_regi_lim%" == "off"

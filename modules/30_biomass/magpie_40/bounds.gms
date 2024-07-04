@@ -6,6 +6,16 @@
 *** |  Contact: remind@pik-potsdam.de
 *** SOF ./modules/30_biomass/magpie_40/bounds.gms
 
+
+*** linearily interpolate damping factor from 0.4 in 2005 to 2 in 2100 (extrapolate after 2100)
+s30_damping_up = 2;
+s30_damping_lo = 0.4;
+
+p30_damping(ttot) = 0.4;
+p30_damping(t)$(t.val ge 2005 AND t.val le 2150) = s30_damping_lo + (s30_damping_up - s30_damping_lo) * (t.val - 2005) / (2100 - 2005)
+
+display p30_damping;
+
 *' @code{extrapage: "00_model_assumptions"}
 *** -------------------------------------------------------------
 *'  #### Bounds on 1st generation biomass annual production

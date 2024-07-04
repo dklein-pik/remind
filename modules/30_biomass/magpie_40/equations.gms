@@ -94,7 +94,7 @@ q30_priceshift$(s30_switch_shiftcalc eq 1)..
 q30_costAdj(ttot,regi)$(ttot.val ge cm_startyear)..
          v30_multcost(ttot,regi)
          =e=
-         power((vm_fuExtr(ttot,regi,"pebiolc","1")-pm_pebiolc_demandmag(ttot,regi))/ (pm_pebiolc_demandmag(ttot,regi) + 0.15),2) * 0.4 + 1
+         power((vm_fuExtr(ttot,regi,"pebiolc","1")-pm_pebiolc_demandmag(ttot,regi))/ (pm_pebiolc_demandmag(ttot,regi) + 0.15),2) * p30_damping(ttot) + 1
 ;
 
 ***---------------------------------------------------------------------------
